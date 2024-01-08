@@ -1,0 +1,148 @@
+{
+    "type": "MySQLNotebook",
+    "version": "1.0",
+    "caption": "DB Notebook",
+    "content": "\\about\ncreate database big_event;\n\nuse big_event;\n\n-- 创建用户表\ncreate table user(\n    id int unsigned primary key auto_increment comment 'ID',\n    username varchar(20) not null unique comment '用户名',\n    password varchar(32) comment '密码',\n    nickname varchar(10) default '' comment '昵称',\n    email varchar(128) default '' comment '邮箱',\n    avatar varchar(128) default '' comment '头像',\n    create_time datetime not null comment '创建时间',\n    update_time datetime not null comment '修改时间'\n) comment '用户表';\n\nselect * from user;\n\n-- 分类表\ncreate table category(\n    id int unsigned primary key auto_increment comment 'ID',\n    category_name varchar(32) not null comment '分类名称',\n    category_alias varchar(32) not null comment '分类别名',\n    create_user int unsigned not null comment '创建人 ID',\n    create_time datetime not null comment '创建时间',\n    update_time datetime not null comment '修改时间',\n    constraint fk_category_user foreign key (create_user) references user(id)\n) comment '分类';\n\n-- 文章表\ncreate table article(\n    id int unique primary key auto_increment comment 'ID',\n    title varchar(30) not null comment '文章标题',\n    content varchar(10000) not null comment '文章内容',\n    cover_img varchar(128) not null comment '文章封面',\n    state char(1) default 0 comment '文章状态：0 草稿 1 已发布',\n    category_id int unsigned comment '文章分类 ID',\n    create_user int unsigned comment '文章分类 ID',\n    create_time datetime not null comment '创建时间',\n    update_time datetime not null comment '更新时间',\n    constraint fk_article_category foreign key (category_id) references category(id),\n    constraint fk_article_user foreign key (create_user) references user(id)\n) comment '文章';",
+    "options": {
+        "tabSize": 4,
+        "indentSize": 4,
+        "insertSpaces": true,
+        "defaultEOL": "LF",
+        "trimAutoWhitespace": true
+    },
+    "viewState": {
+        "cursorState": [
+            {
+                "inSelectionMode": false,
+                "selectionStart": {
+                    "lineNumber": 44,
+                    "column": 16
+                },
+                "position": {
+                    "lineNumber": 44,
+                    "column": 16
+                }
+            }
+        ],
+        "viewState": {
+            "scrollLeft": 0,
+            "firstPosition": {
+                "lineNumber": 1,
+                "column": 1
+            },
+            "firstPositionDeltaTop": -2
+        },
+        "contributionsState": {
+            "editor.contrib.folding": {},
+            "editor.contrib.wordHighlighter": false
+        }
+    },
+    "contexts": [
+        {
+            "state": {
+                "start": 1,
+                "end": 1,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 2,
+                            "content": "Welcome to the MySQL Shell - DB Notebook.\n\nPress Cmd+Enter to execute the code block.\n\nExecute \\sql to switch to SQL, \\js to JavaScript and \\ts to TypeScript mode.\nExecute \\help or \\? for help;",
+                            "language": "ansi"
+                        }
+                    ]
+                },
+                "currentHeight": 119,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 6
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 2,
+                "end": 44,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "c1822da2-3d1d-4643-af6a-10de08a42adf",
+                            "content": "OK, 0 records retrieved in 49.755ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 26
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 26,
+                            "length": 16
+                        },
+                        "contentStart": 28,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 42,
+                            "length": 448
+                        },
+                        "contentStart": 53,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 490,
+                            "length": 21
+                        },
+                        "contentStart": 492,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 511,
+                            "length": 453
+                        },
+                        "contentStart": 520,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 964,
+                            "length": 670
+                        },
+                        "contentStart": 973,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        }
+    ]
+}

@@ -1,0 +1,11 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "BigEventApplication",
+      "request": "launch",
+      "mainClass": "com.ginlon.BigEventApplication",
+      "projectName": "big-event"
+    },
+  ]
+}
