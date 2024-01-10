@@ -2,6 +2,7 @@ package com.ginlon.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,15 +12,19 @@ import com.ginlon.pojo.Result;
 import com.ginlon.pojo.User;
 import com.ginlon.service.UserService;
 
+import jakarta.validation.constraints.Pattern;
+
 @RestController
 @RequestMapping("/user")
+@Validated
 public class UserController {
 
   @Autowired
   private UserService userService;
 
   @PostMapping("/register")
-  public Result register(String username, String password) {
+  public Result register(@Pattern(regexp = "^\\S{5,16}") String username,
+      @Pattern(regexp = "^\\S{5,16}") String password) {
     // 查询用户
     User user = userService.findByUsername(username);
 
