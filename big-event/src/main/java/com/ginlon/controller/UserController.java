@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ginlon.pojo.Result;
 import com.ginlon.pojo.User;
 import com.ginlon.service.UserService;
+import com.ginlon.utils.Md5Util;
 
 import jakarta.validation.constraints.Pattern;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/user")
@@ -38,6 +40,26 @@ public class UserController {
       return Result.error("用户名已经被占用");
     }
     // 注册
+  }
+
+  @PostMapping("/login")
+  public Result<String> login(@Pattern(regexp = "^\\S{5,16}") String username,
+      @Pattern(regexp = "^\\S{5,16}") String password) {
+
+    // 查询用户
+    User loginUser = userService.findByUsername(username);
+
+    // 判断用户是否存在
+    if (loginUser == null) {
+      return Result.error("用户名错误");
+    }
+
+    // 判断密码是否正确
+    if (Md5Util.encode(password).equals(loginUser.getPassword())) {
+      return Result.success("jwt token string");
+    }
+
+    return Result.error("密码错误");
   }
 
 }

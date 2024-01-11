@@ -16,11 +16,11 @@ public class Result<T> {
     return new Result<>(200, "success", data);
   }
 
-  public static Result success() {
-    return new Result(200, "success", null);
+  public static Result<String> success() {
+    return new Result<String>(200, "success", null);
   }
 
-  public static Result error(String message) {
-    return new Result(500, message, null);
+  public static Result<String> error(String message) {
+    return new Result<String>(500, message, null);
   }
 }

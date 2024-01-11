@@ -1,4 +1,5 @@
 /Users/gaojinlong/ThisMac/coding/java/big-event/big-event/src/main/java/com/ginlon/BigEventApplication.java
+/Users/gaojinlong/ThisMac/coding/java/big-event/big-event/src/main/java/com/ginlon/exception/GlobalExceptionHandler.java
 /Users/gaojinlong/ThisMac/coding/java/big-event/big-event/src/main/java/com/ginlon/mapper/UserMapper.java
 /Users/gaojinlong/ThisMac/coding/java/big-event/big-event/src/main/java/com/ginlon/controller/UserController.java
 /Users/gaojinlong/ThisMac/coding/java/big-event/big-event/src/main/java/com/ginlon/utils/Md5Util.java
