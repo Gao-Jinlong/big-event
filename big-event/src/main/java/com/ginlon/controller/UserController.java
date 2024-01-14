@@ -1,6 +1,10 @@
 package com.ginlon.controller;
 
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ginlon.pojo.Result;
 import com.ginlon.pojo.User;
 import com.ginlon.service.UserService;
+import com.ginlon.utils.JwtUtil;
 import com.ginlon.utils.Md5Util;
 
 import jakarta.validation.constraints.Pattern;
@@ -56,7 +61,11 @@ public class UserController {
 
     // 判断密码是否正确
     if (Md5Util.encode(password).equals(loginUser.getPassword())) {
-      return Result.success("jwt token string");
+      Map<String, Object> claims = new HashMap<>();
+      claims.put("username", username);
+      claims.put("id", loginUser.getId());
+      String token = JwtUtil.genToken(claims);
+      return Result.success(token);
     }
 
     return Result.error("密码错误");
