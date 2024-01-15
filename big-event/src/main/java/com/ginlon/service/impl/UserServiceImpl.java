@@ -1,5 +1,7 @@
 package com.ginlon.service.impl;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,12 @@ public class UserServiceImpl implements UserService {
 
     // 添加
     userMapper.add(username, md5String);
+  }
+
+  @Override
+  public void update(User user) {
+    user.setUpdateTime(LocalDateTime.now());
+    userMapper.update(user);
   }
 
 }
