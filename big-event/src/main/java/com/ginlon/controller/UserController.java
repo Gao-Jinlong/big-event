@@ -17,6 +17,7 @@ import com.ginlon.pojo.User;
 import com.ginlon.service.UserService;
 import com.ginlon.utils.JwtUtil;
 import com.ginlon.utils.Md5Util;
+import com.ginlon.utils.ThreadLocalUtil;
 
 import jakarta.validation.constraints.Pattern;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -74,9 +75,10 @@ public class UserController {
   }
 
   @GetMapping("/userInfo")
-  public Result<User> userInfo(@RequestHeader("Authorization") String token) {
-    Map<String, Object> claims = JwtUtil.parseToken(token);
+  public Result<User> userInfo(/* @RequestHeader("Authorization") String token */) {
+    // Map<String, Object> claims = JwtUtil.parseToken(token);
 
+    Map<String, Object> claims = ThreadLocalUtil.get();
     String username = (String) claims.get("username");
 
     User user = userService.findByUsername(username);

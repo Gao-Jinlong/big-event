@@ -27,7 +27,7 @@ public class JwtTest {
 
   @Test
   public void testParse() {
-    String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiMSIsInVzZXJuYW1lIjoi5byg5LiJIn0sImV4cCI6MTcwNTExMjA5NH0.IG7SLvpJsxNmETiUC2pw8kIII7JbC0zmknMd5qzcMWg";
+    String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiMSIsInVzZXJuYW1lIjoi5byg5LiJIn0sImV4cCI6MTcwNTM3NDIyOH0.V6EKbfgGBW333hW4_JZtSpt1NInqmBx0-ZedBbpIPms";
     JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256("ginlon")).build();
 
     DecodedJWT decodedJWT = jwtVerifier.verify(token);
