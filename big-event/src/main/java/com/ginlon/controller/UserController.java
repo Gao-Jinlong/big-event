@@ -20,6 +20,8 @@ import com.ginlon.utils.Md5Util;
 
 import jakarta.validation.constraints.Pattern;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequestMapping("/user")
@@ -69,6 +71,16 @@ public class UserController {
     }
 
     return Result.error("密码错误");
+  }
+
+  @GetMapping("/userInfo")
+  public Result<User> userInfo(@RequestHeader("Authorization") String token) {
+    Map<String, Object> claims = JwtUtil.parseToken(token);
+
+    String username = (String) claims.get("username");
+
+    User user = userService.findByUsername(username);
+    return Result.success(user);
   }
 
 }
