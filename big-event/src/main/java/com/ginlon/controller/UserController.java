@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.hibernate.validator.constraints.URL;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -98,6 +99,30 @@ public class UserController {
   @PatchMapping("/updateAvatar")
   public Result updateAvatar(@RequestParam @URL String avatarUrl) {
     userService.updateAvatar(avatarUrl);
+    return Result.success();
+  }
+
+  @PatchMapping("/updatePassword")
+  public Result updatePassword(@RequestBody Map<String, String> params) {
+    // 旧密码
+    String oldPassword = params.get("oldPassword");
+    // 新密码
+    String newPassword = params.get("newPassword");
+
+    if (!StringUtils.hasLength(oldPassword) || !StringUtils.hasLength(newPassword)) {
+      return Result.error("密码不能为空");
+    }
+
+    // 获取用户信息
+    Map<String, Object> claims = ThreadLocalUtil.get();
+    String username = (String) claims.get("username");
+    User loginUser = userService.findByUsername(username);
+    if (!loginUser.getPassword().equals(Md5Util.encode(oldPassword))) {
+      return Result.error("旧密码错误");
+    }
+
+    userService.updatePassword(newPassword);
+
     return Result.success();
   }
 }
