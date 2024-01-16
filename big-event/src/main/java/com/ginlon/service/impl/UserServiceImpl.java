@@ -1,6 +1,7 @@
 package com.ginlon.service.impl;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import com.ginlon.mapper.UserMapper;
 import com.ginlon.pojo.User;
 import com.ginlon.service.UserService;
 import com.ginlon.utils.Md5Util;
+import com.ginlon.utils.ThreadLocalUtil;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -34,6 +36,13 @@ public class UserServiceImpl implements UserService {
   public void update(User user) {
     user.setUpdateTime(LocalDateTime.now());
     userMapper.update(user);
+  }
+
+  @Override
+  public void updateAvatar(String avatarUrl) {
+    Map<String, Object> claims = ThreadLocalUtil.get();
+    Integer id = (Integer) claims.get("id");
+    userMapper.updateAvatar(avatarUrl, id);
   }
 
 }

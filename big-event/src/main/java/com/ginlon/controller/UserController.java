@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.hibernate.validator.constraints.URL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,7 @@ import jakarta.validation.constraints.Pattern;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 
 @RestController
 @RequestMapping("/user")
@@ -91,5 +93,11 @@ public class UserController {
     userService.update(user);
     return Result.success();
 
+  }
+
+  @PatchMapping("/updateAvatar")
+  public Result updateAvatar(@RequestParam @URL String avatarUrl) {
+    userService.updateAvatar(avatarUrl);
+    return Result.success();
   }
 }
