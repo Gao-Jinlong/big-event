@@ -11,5 +11,5 @@ public class Category {
   private String categoryAlias;
   private Integer createUser;
   private LocalDateTime createTime;
-  private LocalDateTime upDateTime;
+  private LocalDateTime updateTime;
 }
