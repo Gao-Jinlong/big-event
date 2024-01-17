@@ -34,4 +34,15 @@ public class CategoryServiceImpl implements CategoryService {
     Integer id = (Integer) claims.get("id");
     return categoryMapper.list(id);
   }
+
+  @Override
+  public Category detail(Integer id) {
+    return categoryMapper.detail(id);
+  }
+
+  @Override
+  public void update(Category category) {
+    category.setUpdateTime(LocalDateTime.now());
+    categoryMapper.update(category);
+  }
 }

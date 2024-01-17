@@ -14,6 +14,8 @@ import com.ginlon.pojo.Result;
 import com.ginlon.service.CategoryService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping("/category")
@@ -23,7 +25,7 @@ public class CategoryController {
   private CategoryService categoryService;
 
   @PostMapping
-  public Result add(@RequestBody @Validated Category category) {
+  public Result add(@RequestBody @Validated(Category.Add.class) Category category) {
     categoryService.add(category);
     return Result.success();
   }
@@ -34,4 +36,17 @@ public class CategoryController {
 
     return Result.success(categories);
   }
+
+  @GetMapping("/detail")
+  public Result<Category> detail(Integer id) {
+    Category category = categoryService.detail(id);
+    return Result.success(category);
+  }
+
+  @PutMapping
+  public Result update(@RequestBody @Validated(Category.Update.class) Category category) {
+    categoryService.update(category);
+    return Result.success();
+  }
+
 }
