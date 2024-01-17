@@ -1,6 +1,7 @@
 package com.ginlon.service.impl;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,12 @@ public class CategoryServiceImpl implements CategoryService {
     category.setUpdateTime(LocalDateTime.now());
     category.setCreateUser(id);
     categoryMapper.add(category);
+  }
+
+  @Override
+  public List<Category> list() {
+    Map<String, Object> claims = ThreadLocalUtil.get();
+    Integer id = (Integer) claims.get("id");
+    return categoryMapper.list(id);
   }
 }

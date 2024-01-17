@@ -1,5 +1,7 @@
 package com.ginlon.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ginlon.pojo.Category;
 import com.ginlon.pojo.Result;
 import com.ginlon.service.CategoryService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/category")
@@ -22,5 +26,12 @@ public class CategoryController {
   public Result add(@RequestBody @Validated Category category) {
     categoryService.add(category);
     return Result.success();
+  }
+
+  @GetMapping
+  public Result<List<Category>> list() {
+    List<Category> categories = categoryService.list();
+
+    return Result.success(categories);
   }
 }
