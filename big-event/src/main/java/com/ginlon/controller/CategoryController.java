@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ginlon.pojo.Category;
 import com.ginlon.pojo.Result;
 import com.ginlon.service.CategoryService;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -49,4 +51,9 @@ public class CategoryController {
     return Result.success();
   }
 
+  @DeleteMapping
+  public Result delete(Integer id) {
+    categoryService.delete(id);
+    return Result.success();
+  }
 }
