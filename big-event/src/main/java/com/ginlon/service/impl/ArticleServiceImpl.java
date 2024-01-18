@@ -1,6 +1,7 @@
 package com.ginlon.service.impl;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,10 @@ public class ArticleServiceImpl implements ArticleService {
     article.setCreateUser(id);
 
     articleMapper.add(article);
+  }
+
+  @Override
+  public List<Article> findAll() {
+    return articleMapper.findAll();
   }
 }

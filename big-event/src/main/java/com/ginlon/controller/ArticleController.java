@@ -8,6 +8,8 @@ import com.ginlon.service.ArticleService;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,11 +30,8 @@ public class ArticleController {
   }
 
   @GetMapping("/list")
-  public Result<String> list(
-
-  ) {
-
-    return Result.success();
+  public Result<List<?>> list() {
+    return Result.success(articleService.findAll());
   }
 
 }

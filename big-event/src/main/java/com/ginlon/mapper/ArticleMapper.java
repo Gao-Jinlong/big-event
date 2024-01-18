@@ -1,7 +1,10 @@
 package com.ginlon.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import com.ginlon.pojo.Article;
 
@@ -12,4 +15,6 @@ public interface ArticleMapper {
       "value(#{title}, #{content}, #{coverImg}, #{state}, #{categoryId}, #{createUser}, #{createTime}, #{updateTime})")
   void add(Article article);
 
+  @Select("select * from article")
+  List<Article> findAll();
 }
