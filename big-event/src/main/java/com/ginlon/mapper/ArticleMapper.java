@@ -15,6 +15,5 @@ public interface ArticleMapper {
       "value(#{title}, #{content}, #{coverImg}, #{state}, #{categoryId}, #{createUser}, #{createTime}, #{updateTime})")
   void add(Article article);
 
-  @Select("select * from article")
-  List<Article> findAll();
+  List<Article> list(Integer userId, Integer categoryId, String state);
 }

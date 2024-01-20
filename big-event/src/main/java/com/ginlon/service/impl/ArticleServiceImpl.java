@@ -9,8 +9,11 @@ import org.springframework.stereotype.Service;
 
 import com.ginlon.mapper.ArticleMapper;
 import com.ginlon.pojo.Article;
+import com.ginlon.pojo.PageBean;
 import com.ginlon.service.ArticleService;
 import com.ginlon.utils.ThreadLocalUtil;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -31,7 +34,22 @@ public class ArticleServiceImpl implements ArticleService {
   }
 
   @Override
-  public List<Article> findAll() {
-    return articleMapper.findAll();
+  public PageBean<Article> list(Integer pageNum, Integer pageSize, Integer categoryId, String state) {
+    PageBean<Article> pageBean = new PageBean<>();
+
+    PageHelper.startPage(pageNum, pageSize);
+
+    Map<String, Object> claims = ThreadLocalUtil.get();
+    Integer userId = (Integer) claims.get("id");
+
+    List<Article> articleList = articleMapper.list(userId, categoryId, state);
+
+    // Page 中提供了方法，可以获取 PageHelper 分页查询后的结果集
+    Page<Article> page = (Page<Article>) articleList;
+
+    pageBean.setItems(page.getResult());
+    pageBean.setTotal(page.getTotal());
+
+    return pageBean;
   }
 }
