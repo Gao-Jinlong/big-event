@@ -1,0 +1,29 @@
+# 忽略操作系统文件
+.DS_Store
+
+# 忽略 Java 编译输出目录
+/bin
+/build
+/classes
+**/target/*
+
+# 忽略 Maven 依赖目录
+.mvn/
+!**/src/main/**/mvnw
+!**/src/main/**/mvnw.cmd
+!**/src/main/**/mvn/wrapper/maven-wrapper.jar
+
+# 忽略测试报告
+/test-output/
+/test-results/
+
+# 忽略库和依赖包
+/lib/
+/libs/
+
+# 忽略临时和备份文件
+*.bak
+*.tmp
+
+# 忽略外部工具文件
+/coverage/
