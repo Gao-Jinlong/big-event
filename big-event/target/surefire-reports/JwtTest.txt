@@ -1,4 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: JwtTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.179 s - in JwtTest
+Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.243 s <<< FAILURE! - in JwtTest
+testParse  Time elapsed: 0.04 s  <<< ERROR!
+com.auth0.jwt.exceptions.TokenExpiredException: The Token has expired on 2024-01-16T03:03:48Z.
+	at JwtTest.testParse(JwtTest.java:33)
+

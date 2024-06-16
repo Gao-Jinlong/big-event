@@ -1,10 +1,10 @@
 com/ginlon/service/UserService.class
-com/ginlon/mapper/UserMapper.class
 com/ginlon/pojo/Category.class
-com/ginlon/service/impl/UserServiceImpl.class
-com/ginlon/pojo/Result.class
 com/ginlon/pojo/User.class
-com/ginlon/pojo/Article.class
 com/ginlon/utils/Md5Util.class
 com/ginlon/controller/UserController.class
+com/ginlon/mapper/UserMapper.class
+com/ginlon/service/impl/UserServiceImpl.class
+com/ginlon/pojo/Result.class
+com/ginlon/pojo/Article.class
 com/ginlon/BigEventApplication.class

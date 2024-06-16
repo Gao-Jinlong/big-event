@@ -2,10 +2,17 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Demo",
+      "request": "launch",
+      "mainClass": "Demo",
+      "projectName": "big-event"
+    },
+    {
+      "type": "java",
       "name": "BigEventApplication",
       "request": "launch",
       "mainClass": "com.ginlon.BigEventApplication",
       "projectName": "big-event"
-    },
+    }
   ]
 }
