@@ -1,3 +1,5 @@
+package com.ginlon;
+
 import com.aliyun.oss.ClientException;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;

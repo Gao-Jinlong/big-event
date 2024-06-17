@@ -17,14 +17,23 @@ public class AliOssUtil {
   // 填写Bucket名称，例如examplebucket。
   private static final String bucketName = "ginlon-big-event";
 
+  private static final EnvironmentVariableCredentialsProvider credentialsProvider;
+
+  static {
+    try {
+      // 从环境变量中获取访问凭证。运行本代码示例之前，请确保已设置环境变量OSS_ACCESS_KEY_ID和OSS_ACCESS_KEY_SECRET。
+      credentialsProvider = CredentialsProviderFactory
+          .newEnvironmentVariableCredentialsProvider();
+    } catch (Exception e) {
+      throw new RuntimeException("初始化OSS客户端失败", e);
+    }
+  }
+
   // 填写Object完整路径，例如exampledir/exampleobject.txt。Object完整路径中不能包含Bucket名称。
 
   public static String uploadFile(String objectName, InputStream stream) throws Exception {
     String url = "";
 
-    // 从环境变量中获取访问凭证。运行本代码示例之前，请确保已设置环境变量OSS_ACCESS_KEY_ID和OSS_ACCESS_KEY_SECRET。
-    EnvironmentVariableCredentialsProvider credentialsProvider = CredentialsProviderFactory
-        .newEnvironmentVariableCredentialsProvider();
     // 创建OSSClient实例。
     OSS ossClient = new OSSClientBuilder().build(endpoint, credentialsProvider);
 

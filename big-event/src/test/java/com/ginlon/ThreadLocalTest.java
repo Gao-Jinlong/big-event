@@ -1,3 +1,5 @@
+package com.ginlon;
+
 import org.junit.jupiter.api.Test;
 
 // ThreadLocal 用于保存线程的局部变量，是一个以 ThreadLocal 对象为键、任意对象为值的存储结构

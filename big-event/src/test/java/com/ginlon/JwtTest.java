@@ -1,3 +1,5 @@
+package com.ginlon;
+
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
