@@ -4,9 +4,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.hibernate.validator.constraints.URL;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,6 +38,8 @@ public class UserController {
 
   @Autowired
   private UserService userService;
+  @Autowired
+  private StringRedisTemplate stringRedisTemplate;
 
   @PostMapping("/register")
   public Result register(@Pattern(regexp = "^\\S{5,16}") String username,
@@ -72,6 +77,11 @@ public class UserController {
       claims.put("username", username);
       claims.put("id", loginUser.getId());
       String token = JwtUtil.genToken(claims);
+
+      // token 存入 redis
+      ValueOperations<String, String> operations = stringRedisTemplate.opsForValue();
+      operations.set(token, token, 1, TimeUnit.HOURS);
+
       return Result.success(token);
     }
 
@@ -103,7 +113,7 @@ public class UserController {
   }
 
   @PatchMapping("/updatePassword")
-  public Result updatePassword(@RequestBody Map<String, String> params) {
+  public Result updatePassword(@RequestBody Map<String, String> params, @RequestHeader("Authorization") String token) {
     // 旧密码
     String oldPassword = params.get("oldPassword");
     // 新密码
@@ -122,6 +132,9 @@ public class UserController {
     }
 
     userService.updatePassword(newPassword);
+
+    ValueOperations<String, String> operations = stringRedisTemplate.opsForValue();
+    operations.getOperations().delete(token);
 
     return Result.success();
   }
